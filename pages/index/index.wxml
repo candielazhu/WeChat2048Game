@@ -1,0 +1,56 @@
+<view class="container">
+  <view class="header">
+    <view class="title">2048</view>
+    <view class="scores">
+      <view class="score-box">
+        <text>分数</text>
+        <view class="score">{{score}}</view>
+      </view>
+      <view class="score-box">
+        <text>最高分</text>
+        <view class="score">{{bestScore}}</view>
+      </view>
+    </view>
+  </view>
+
+
+  <view 
+    class="game-board" 
+    bindtouchstart="touchStart" 
+    bindtouchmove="touchMove"
+    bindtouchend="touchEnd"
+  >
+    <view class="grid-container">
+      <block wx:for="{{grid}}" wx:key="row-{{index}}">
+        <block wx:for="{{item}}" wx:key="cell-{{index}}-{{index2}}">
+          <view class="cell"></view>
+        </block>
+      </block>
+    </view>
+    
+    <view class="tiles-container">
+      <block wx:for="{{tiles}}" wx:key="tile-{{item.id}}">
+        <view 
+          class="tile tile-{{item.value}} {{item.merged ? 'merged' : ''}} {{item.new ? 'new' : ''}}"
+          style="transform: translate({{item.targetX * 160}}rpx, {{item.targetY * 160}}rpx);"
+        >
+          {{item.value}}
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="game-info">
+    <navigator url="/pages/game2/game">
+      <text>滑动屏幕移动方块，相同数字合并加倍！</text>
+    </navigator>
+    <button class="restart-btn" bindtap="restartGame">重新开始</button>
+  </view>
+
+  <view wx:if="{{gameOver}}" class="game-over">
+    <view class="game-over-content">
+      <text>游戏结束！</text>
+      <button class="restart-btn" bindtap="restartGame">再玩一次</button>
+    </view>
+  </view>
+</view>
