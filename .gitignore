@@ -1,0 +1,27 @@
+
+# 基础忽略规则
+*.log
+*.tmp
+*.bak
+
+# 开发环境文件
+.env
+.env.local
+.env.*.local
+
+# 依赖目录
+node_modules/
+dist/
+build/
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器文件
+.idea/
+.vscode/
+
+# 微信项目特有
+project.config.json   # 含有敏感信息的配置文件
+unpackage/            # 小程序编译目录
