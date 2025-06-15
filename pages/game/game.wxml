@@ -1,0 +1,37 @@
+<view class="game-container">
+  <!-- 游戏头部 -->
+  <view class="header">
+    <view class="title">2048</view>
+    <view class="score-container">
+      <view class="score-box">
+        <view class="score-label">得分</view>
+        <view class="score-value">{{score}}</view>
+      </view>
+      <view class="score-box">
+        <view class="score-label">最高</view>
+        <view class="score-value">{{bestScore}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 游戏面板 -->
+  <view class="game-board {{isEmergency ? 'emergency' : ''}}" 
+        bindtouchstart="onTouchStart" 
+        bindtouchend="onTouchEnd">
+    <view class="grid-container">
+      <view class="grid-row" wx:for="{{board}}" wx:key="index" wx:for-index="row">
+        <view class="grid-cell {{item > 0 ? 'tile-' + item : ''}} {{animationClasses[row][col] || ''}}" 
+              wx:for="{{item}}" 
+              wx:for-index="col"
+              wx:key="col">
+          <text wx:if="{{item > 0}}">{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 控制按钮 -->
+  <view class="controls">
+    <button class="new-game-btn" bindtap="restart">新游戏</button>
+  </view>
+</view>
