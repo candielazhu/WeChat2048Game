@@ -1,217 +1,243 @@
-.game-container {
+.index-container {
   background: #faf8ef;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 40rpx;
   box-sizing: border-box;
 }
 
+/* 头部样式 */
 .header {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 40rpx;
-  padding: 40rpx;
-  margin-bottom: 40rpx;
-  backdrop-filter: blur(20rpx);
-  box-shadow: 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600rpx;
+  text-align: center;
+  margin-bottom: 60rpx;
 }
 
-.title {
-  font-size: 96rpx;
+.game-title {
+  font-size: 120rpx;
+  font-weight: 900;
+  color: #776e65;
+  text-shadow: 4rpx 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: 30rpx;
+  letter-spacing: 8rpx;
+}
+
+.best-score-display {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50rpx;
+  padding: 20rpx 40rpx;
+  backdrop-filter: blur(20rpx);
+  box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}
+
+.best-label {
+  font-size: 24rpx;
+  color: #776e65;
+  margin-bottom: 8rpx;
+}
+
+.best-value {
+  font-size: 48rpx;
   font-weight: bold;
   color: #776e65;
-  text-align: center;
-  margin-bottom: 20rpx;
-  text-shadow: 4rpx 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
 
-.score-container {
+/* 角色选择区域 */
+.character-section {
+  flex: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 40rpx;
+  margin-bottom: 60rpx;
 }
 
-.score-box {
-  background: #bbada0;
-  padding: 20rpx 40rpx;
-  border-radius: 20rpx;
-  color: white;
-  text-align: center;
-  min-width: 160rpx;
-}
-
-.score-label {
-  font-size: 24rpx;
-  margin-bottom: 10rpx;
-}
-
-.score-value {
-  font-size: 40rpx;
-  font-weight: bold;
-}
-
-/* 紧急状态时游戏面板的红框效果 */
-.game-board.emergency {
-  border: 6rpx solid #ff4757;
-  box-shadow: 0 0 40rpx rgba(255, 71, 87, 0.5), 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
-  animation: emergency-pulse 2s infinite;
-}
-
-.game-board {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 40rpx;
-  padding: 40rpx;
+.section-title {
+  font-size: 36rpx;
+  color: #776e65;
   margin-bottom: 40rpx;
-  backdrop-filter: blur(20rpx);
-  box-shadow: 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.character-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  max-width: 600rpx;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+
+.arrow-btn {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10rpx);
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-.grid-container {
-  background: #bbada0;
-  border-radius: 20rpx;
-  padding: 20rpx;
-  display: flex;
-  flex-direction: column;
-  gap: 20rpx;
+.arrow-btn:active {
+  transform: scale(0.9);
+  background: rgba(255, 255, 255, 1);
 }
 
-.grid-row {
-  display: flex;
-  gap: 20rpx;
+.arrow-icon {
+  font-size: 48rpx;
+  color: #776e65;
+  font-weight: bold;
+  line-height: 1;
 }
 
-.grid-cell {
-  background: rgba(238, 228, 218, 0.35);
-  border-radius: 12rpx;
-  width: 140rpx;
-  height: 140rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 64rpx;
+.left-arrow {
+  margin-right: 40rpx;
+}
+
+.right-arrow {
+  margin-left: 40rpx;
+}
+
+.character-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 40rpx;
+  padding: 60rpx 40rpx;
+  text-align: center;
+  min-width: 400rpx;
+  box-shadow: 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20rpx);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: cardFloat 3s ease-in-out infinite;
+}
+
+.character-card:active {
+  transform: scale(0.98);
+}
+
+.character-avatar {
+  font-size: 120rpx;
+  margin-bottom: 20rpx;
+  animation: avatarPulse 2s ease-in-out infinite;
+}
+
+.character-name {
+  font-size: 48rpx;
   font-weight: bold;
   color: #776e65;
-  transition: all 0.25s cubic-bezier(0.3, 0.9, 0.4, 1.2);
-  /* 添加3D变换提升流畅度 */
-  transform: translateZ(0);
+  margin-bottom: 20rpx;
 }
 
-/* 方块颜色样式 */
-.tile-2 { background: #eee4da; color: #776e65; }
-.tile-4 { background: #ede0c8; color: #776e65; }
-.tile-8 { background: #f2b179; color: #f9f6f2; }
-.tile-16 { background: #f59563; color: #f9f6f2; font-size: 60rpx; }
-.tile-32 { background: #f67c5f; color: #f9f6f2; font-size: 60rpx; }
-.tile-64 { background: #f65e3b; color: #f9f6f2; font-size: 60rpx; }
-.tile-128 { background: #edcf72; color: #f9f6f2; font-size: 56rpx; }
-.tile-256 { background: #edcc61; color: #f9f6f2; font-size: 56rpx; }
-.tile-512 { background: #edc850; color: #f9f6f2; font-size: 56rpx; }
-.tile-1024 { background: #edc53f; color: #f9f6f2; font-size: 48rpx; }
-.tile-2048 { background: #edc22e; color: #f9f6f2; font-size: 48rpx; }
+.character-description {
+  font-size: 28rpx;
+  color: #8f7a66;
+  margin-bottom: 30rpx;
+  line-height: 1.4;
+}
 
-.controls {
+.skill-badge {
+  background: #bbada0;
+  color: white;
+  padding: 16rpx 32rpx;
+  border-radius: 50rpx;
+  font-size: 24rpx;
+  font-weight: bold;
+  display: inline-block;
+  box-shadow: 0 8rpx 20rpx rgba(187, 173, 160, 0.3);
+}
+
+.skill-text {
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 角色指示器 */
+.character-indicators {
+  display: flex;
+  gap: 20rpx;
+}
+
+.indicator {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: rgba(187, 173, 160, 0.3);
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #bbada0;
+  transform: scale(1.2);
+  box-shadow: 0 4rpx 12rpx rgba(187, 173, 160, 0.4);
+}
+
+/* 开始游戏按钮 */
+.start-section {
   margin-bottom: 40rpx;
 }
 
-.new-game-btn {
+.start-game-btn {
   background: #8f7a66;
   color: white;
   border: none;
-  padding: 24rpx 60rpx;
-  border-radius: 50rpx;
-  font-size: 32rpx;
+  padding: 32rpx 80rpx;
+  border-radius: 60rpx;
+  font-size: 36rpx;
   font-weight: bold;
-  box-shadow: 0 8rpx 30rpx rgba(255, 191, 107, 0.3);
+  box-shadow: 0 16rpx 40rpx rgba(143, 122, 102, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.new-game-btn::after {
+.start-game-btn::after {
   border: none;
 }
 
-/* 左滑动画 */
-.slide-left {
-  animation: slideLeft 0.25s cubic-bezier(0.3, 0.9, 0.4, 1.2);
-}
-@keyframes slideLeft {
-  from { transform: translateX(40rpx); opacity: 0.8; }
-  to { transform: translateX(0); opacity: 1; }
+.start-game-btn:active {
+  transform: translateY(4rpx);
+  box-shadow: 0 8rpx 20rpx rgba(143, 122, 102, 0.4);
 }
 
-/* 右滑动画 */
-.slide-right {
-  animation: slideRight 0.25s cubic-bezier(0.3, 0.9, 0.4, 1.2);
-}
-@keyframes slideRight {
-  from { transform: translateX(-40rpx); opacity: 0.8; }
-  to { transform: translateX(0); opacity: 1; }
+.btn-text {
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
 }
 
-/* 上滑动画 */
-.slide-up {
-  animation: slideUp 0.25s cubic-bezier(0.3, 0.9, 0.4, 1.2);
-}
-@keyframes slideUp {
-  from { transform: translateY(40rpx); opacity: 0.8; }
-  to { transform: translateY(0); opacity: 1; }
+/* 底部说明 */
+.footer {
+  text-align: center;
 }
 
-/* 下滑动画 */
-.slide-down {
-  animation: slideDown 0.25s cubic-bezier(0.3, 0.9, 0.4, 1.2);
-}
-@keyframes slideDown {
-  from { transform: translateY(-40rpx); opacity: 0.8; }
-  to { transform: translateY(0); opacity: 1; }
+.tip-text {
+  font-size: 24rpx;
+  color: #8f7a66;
+  line-height: 1.4;
 }
 
-/* 合并动画类： */
-.merge-effect {
-  animation: merge 0.3s cubic-bezier(0.3, 0.9, 0.4, 1.2);
-}
-@keyframes merge {
-  0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
-  50% { transform: scale(1.2); box-shadow: 0 0 30rpx rgba(255, 215, 0, 0.7); }
-  100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+/* 动画效果 */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10rpx); }
 }
 
-/* 方块的淡入效果 */
-.fade-in {
-  animation: fadeIn 0.3s ease-out;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes avatarPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-/* 紧急状态动画效果 */
-@keyframes pulse {
-  0% { box-shadow: 0 10rpx 30rpx rgba(255, 71, 87, 0.3); }
-  50% { box-shadow: 0 10rpx 30rpx rgba(255, 71, 87, 0.6); }
-  100% { box-shadow: 0 10rpx 30rpx rgba(255, 71, 87, 0.3); }
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(4rpx); }
-}
-
-@keyframes emergency-pulse {
-  0% { 
-    box-shadow: 0 0 40rpx rgba(255, 71, 87, 0.5), 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
-    border-color: #ff4757;
+/* 响应式设计 */
+@media (max-width: 400px) {
+  .character-card {
+    min-width: 320rpx;
+    padding: 40rpx 30rpx;
   }
-  50% { 
-    box-shadow: 0 0 60rpx rgba(255, 71, 87, 0.8), 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
-    border-color: #ff3742;
+  
+  .character-avatar {
+    font-size: 100rpx;
   }
-  100% { 
-    box-shadow: 0 0 40rpx rgba(255, 71, 87, 0.5), 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
-    border-color: #ff4757;
+  
+  .character-name {
+    font-size: 40rpx;
   }
 }
