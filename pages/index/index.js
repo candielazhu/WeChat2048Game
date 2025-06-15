@@ -5,7 +5,8 @@ Page({
     board: [],
     gameOver: false,
     size: 4,
-    animationClasses: Array(4).fill().map(() => Array(4).fill(''))
+    animationClasses: Array(4).fill().map(() => Array(4).fill('')),
+    isEmergency: false // 新增：紧急状态标识
   },
 
   onLoad() {
@@ -19,10 +20,12 @@ Page({
     this.setData({
       board: board,
       score: 0,
-      gameOver: false
+      gameOver: false,
+      isEmergency: false // 重置紧急状态
     })
     this.addRandomTile()
     this.addRandomTile()
+    this.checkEmergencyStatus() // 检查紧急状态
   },
 
   // 添加随机方块
@@ -43,6 +46,23 @@ Page({
       board[randomCell.row][randomCell.col] = Math.random() < 0.9 ? 2 : 4
       this.setData({ board: board })
     }
+  },
+
+  // 新增：检查紧急状态（空格是否只剩3个或更少）
+  checkEmergencyStatus() {
+    const board = this.data.board
+    let emptyCount = 0
+    
+    for (let i = 0; i < this.data.size; i++) {
+      for (let j = 0; j < this.data.size; j++) {
+        if (board[i][j] === 0) {
+          emptyCount++
+        }
+      }
+    }
+    
+    const isEmergency = emptyCount <= 3 && emptyCount > 0
+    this.setData({ isEmergency: isEmergency })
   },
 
   // 移动方块
@@ -74,6 +94,7 @@ Page({
         score: this.data.score
       })
       this.addRandomTile()
+      this.checkEmergencyStatus() // 移动后检查紧急状态
       
       if (this.isGameOver()) {
         this.setData({ gameOver: true })

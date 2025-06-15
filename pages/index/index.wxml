@@ -15,7 +15,7 @@
   </view>
 
   <!-- 游戏面板 -->
-  <view class="game-board" 
+  <view class="game-board {{isEmergency ? 'emergency' : ''}}" 
         bindtouchstart="onTouchStart" 
         bindtouchend="onTouchEnd">
     <view class="grid-container">

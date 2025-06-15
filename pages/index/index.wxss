@@ -53,6 +53,13 @@
   font-weight: bold;
 }
 
+/* 紧急状态时游戏面板的红框效果 */
+.game-board.emergency {
+  border: 6rpx solid #ff4757;
+  box-shadow: 0 0 40rpx rgba(255, 71, 87, 0.5), 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
+  animation: emergency-pulse 2s infinite;
+}
+
 .game-board {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 40rpx;
@@ -62,6 +69,7 @@
   box-shadow: 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 600rpx;
+  transition: all 0.3s ease;
 }
 
 .grid-container {
@@ -179,4 +187,31 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* 紧急状态动画效果 */
+@keyframes pulse {
+  0% { box-shadow: 0 10rpx 30rpx rgba(255, 71, 87, 0.3); }
+  50% { box-shadow: 0 10rpx 30rpx rgba(255, 71, 87, 0.6); }
+  100% { box-shadow: 0 10rpx 30rpx rgba(255, 71, 87, 0.3); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(4rpx); }
+}
+
+@keyframes emergency-pulse {
+  0% { 
+    box-shadow: 0 0 40rpx rgba(255, 71, 87, 0.5), 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
+    border-color: #ff4757;
+  }
+  50% { 
+    box-shadow: 0 0 60rpx rgba(255, 71, 87, 0.8), 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
+    border-color: #ff3742;
+  }
+  100% { 
+    box-shadow: 0 0 40rpx rgba(255, 71, 87, 0.5), 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
+    border-color: #ff4757;
+  }
 }
