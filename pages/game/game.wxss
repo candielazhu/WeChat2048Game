@@ -12,7 +12,7 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40rpx;
+  padding: 20rpx 40rpx 30rpx 40rpx;
   box-sizing: border-box;
 }
 
@@ -32,7 +32,7 @@ page {
   font-weight: bold;
   color: #776e65;
   text-align: center;
-  margin-bottom: 20rpx;
+  margin-bottom: 15rpx;
   text-shadow: 4rpx 4rpx 8rpx rgba(0, 0, 0, 0.1);
 }
 
@@ -44,7 +44,7 @@ page {
 
 .score-box {
   background: #bbada0;
-  padding: 20rpx 40rpx;
+  padding: 15rpx 40rpx;
   border-radius: 20rpx;
   color: white;
   text-align: center;
@@ -72,7 +72,7 @@ page {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 40rpx;
   padding: 40rpx;
-  margin-bottom: 40rpx;
+  margin-bottom: 20rpx;
   backdrop-filter: blur(20rpx);
   box-shadow: 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -231,7 +231,7 @@ page {
 }
 
 .skill-section {
-  margin-bottom: 30rpx;
+  margin-bottom: 15rpx;
   width: 100%;
   max-width: 600rpx;
   display: flex;
