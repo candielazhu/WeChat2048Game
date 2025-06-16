@@ -106,9 +106,10 @@
 .character-card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 40rpx;
-  padding: 60rpx 40rpx;
+  padding: 60rpx 30rpx;
   text-align: center;
-  min-width: 400rpx;
+  width: 400rpx;
+  height: 400rpx;
   box-shadow: 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20rpx);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -142,9 +143,9 @@
 .skill-badge {
   background: #bbada0;
   color: white;
-  padding: 16rpx 32rpx;
+  padding: 16rpx 24rpx;
   border-radius: 50rpx;
-  font-size: 24rpx;
+  font-size: 22rpx;
   font-weight: bold;
   display: inline-block;
   box-shadow: 0 8rpx 20rpx rgba(187, 173, 160, 0.3);
