@@ -92,6 +92,11 @@ Page({
   useSkill() {
     if (this.data.gameOver) return;
 
+    // 数值倍增师直接使用基础功能
+    if (this.data.characterSkill === 'blockDouble') {
+      this.activateBlockSelection();
+      return;
+    }
     switch (this.data.characterSkill) {
       case 'timeRewind':
         this.timeRewindSkill();
@@ -106,38 +111,38 @@ Page({
   },
 
   // 显示翻倍选项菜单
-  showDoubleOptions() {
-    const state = this.data.skillState.blockDouble;
-    const options = [];
+  // showDoubleOptions() {
+  //   const state = this.data.skillState.blockDouble;
+  //   const options = [];
 
-    if (state.normalCount > 0) {
-      options.push('指定方块翻倍');
-    }
+  //   if (state.normalCount > 0) {
+  //     options.push('指定方块翻倍');
+  //   }
 
-    if (state.globalCount > 0) {
-      options.push('全局最低值翻倍');
-    }
+  //   if (state.globalCount > 0) {
+  //     options.push('全局最低值翻倍');
+  //   }
 
-    if (options.length === 0) {
-      wx.showToast({
-        title: '无可用翻倍机会',
-        icon: 'none'
-      });
-      return;
-    }
+  //   if (options.length === 0) {
+  //     wx.showToast({
+  //       title: '无可用翻倍机会',
+  //       icon: 'none'
+  //     });
+  //     return;
+  //   }
 
-    wx.showActionSheet({
-      itemList: options,
-      success: (res) => {
-        const selected = options[res.tapIndex];
-        if (selected === '指定方块翻倍') {
-          this.activateBlockSelection();
-        } else if (selected === '全局最低值翻倍') {
-          this.useGlobalDouble();
-        }
-      }
-    });
-  },
+  //   wx.showActionSheet({
+  //     itemList: options,
+  //     success: (res) => {
+  //       const selected = options[res.tapIndex];
+  //       if (selected === '指定方块翻倍') {
+  //         this.activateBlockSelection();
+  //       } else if (selected === '全局最低值翻倍') {
+  //         this.useGlobalDouble();
+  //       }
+  //     }
+  //   });
+  // },
 
   // 使用全局翻倍
   useGlobalDouble() {
@@ -305,7 +310,7 @@ Page({
 
     this.addRandomTile();
     this.checkEmergencyStatus();
-    
+
     wx.showToast({
       title: `消除获得 ${scoreGain}分`,
       icon: 'success'
@@ -327,7 +332,7 @@ Page({
         col: -1
       }
     })
-    
+
     this.initSkillState();
     this.addRandomTile()
     this.addRandomTile()
@@ -404,16 +409,28 @@ Page({
 
     switch (direction) {
       case 'left':
-        ({moved, scoreAdded} = this.moveLeft(newBoard, newAnimationClasses));
+        ({
+          moved,
+          scoreAdded
+        } = this.moveLeft(newBoard, newAnimationClasses));
         break
       case 'right':
-        ({moved, scoreAdded} = this.moveRight(newBoard, newAnimationClasses));
+        ({
+          moved,
+          scoreAdded
+        } = this.moveRight(newBoard, newAnimationClasses));
         break
       case 'up':
-        ({moved, scoreAdded} = this.moveUp(newBoard, newAnimationClasses));
+        ({
+          moved,
+          scoreAdded
+        } = this.moveUp(newBoard, newAnimationClasses));
         break
       case 'down':
-        ({moved, scoreAdded} = this.moveDown(newBoard, newAnimationClasses));
+        ({
+          moved,
+          scoreAdded
+        } = this.moveDown(newBoard, newAnimationClasses));
         break
     }
 
@@ -431,7 +448,7 @@ Page({
         this.setData({
           animationClasses: Array(this.data.size).fill().map(() => Array(this.data.size).fill(''))
         });
-        
+
         this.addRandomTile()
         this.checkEmergencyStatus()
         this.updateSkillCounts(oldScore, newScore)
@@ -449,7 +466,7 @@ Page({
   // 新增：统一的技能次数更新方法
   updateSkillCounts(oldScore, newScore) {
     const scoreIncrease = newScore - oldScore;
-    
+
     if (scoreIncrease > 0) {
       if (this.data.characterSkill === 'timeRewind') {
         const gain = Math.floor(newScore / 2000) - Math.floor(oldScore / 2000)
@@ -513,7 +530,7 @@ Page({
   globalBlockDouble() {
     const board = this.data.board.map(row => [...row])
     let minValue = Infinity
-    
+
     for (let i = 0; i < this.data.size; i++) {
       for (let j = 0; j < this.data.size; j++) {
         if (board[i][j] > 0 && board[i][j] < minValue) {
@@ -568,7 +585,7 @@ Page({
           animationClasses[row][i] = 'merge-effect';
         }
       }
-      
+
       const newLine = line.filter(val => val !== 0)
       while (newLine.length < this.data.size) {
         newLine.push(0)
@@ -585,7 +602,10 @@ Page({
       }
     }
 
-    return { moved, scoreAdded };
+    return {
+      moved,
+      scoreAdded
+    };
   },
 
   // 向右移动
@@ -595,7 +615,7 @@ Page({
 
     for (let row = 0; row < this.data.size; row++) {
       const line = board[row].filter(val => val !== 0)
-      
+
       for (let i = line.length - 1; i > 0; i--) {
         if (line[i] === line[i - 1]) {
           const mergedValue = line[i] * 2;
@@ -605,7 +625,7 @@ Page({
           animationClasses[row][this.data.size - 1 - (line.length - 1 - i)] = 'merge-effect';
         }
       }
-      
+
       const newLine = line.filter(val => val !== 0)
       while (newLine.length < this.data.size) {
         newLine.unshift(0)
@@ -622,7 +642,10 @@ Page({
       }
     }
 
-    return { moved, scoreAdded };
+    return {
+      moved,
+      scoreAdded
+    };
   },
 
   // 向上移动
@@ -664,7 +687,10 @@ Page({
       }
     }
 
-    return { moved, scoreAdded };
+    return {
+      moved,
+      scoreAdded
+    };
   },
 
   // 向下移动
@@ -706,13 +732,16 @@ Page({
       }
     }
 
-    return { moved, scoreAdded };
+    return {
+      moved,
+      scoreAdded
+    };
   },
 
   // 修复后的游戏结束检测
   isGameOver() {
     const board = this.data.board
-    
+
     // 检查是否有空格
     for (let i = 0; i < this.data.size; i++) {
       for (let j = 0; j < this.data.size; j++) {
@@ -774,7 +803,10 @@ Page({
 
       if (row >= 0 && row < this.data.size && col >= 0 && col < this.data.size) {
         this.setData({
-          selectedBlock: { row, col }
+          selectedBlock: {
+            row,
+            col
+          }
         });
       }
     }
@@ -826,9 +858,15 @@ Page({
   onTapBlock(e) {
     if (!this.data.selectingBlock) return;
 
-    const { row, col } = e.currentTarget.dataset;
+    const {
+      row,
+      col
+    } = e.currentTarget.dataset;
     this.setData({
-      selectedBlock: { row, col }
+      selectedBlock: {
+        row,
+        col
+      }
     });
 
     this.doubleSelectedBlock();
@@ -870,10 +908,10 @@ Page({
 
   // 修复后的游戏结束弹窗
   showGameOverModal() {
-    const canRewind = this.data.characterSkill === 'timeRewind' && 
-                     this.data.skillState.timeRewind.count > 0 &&
-                     this.data.skillState.timeRewind.history.length > 0;
-    
+    const canRewind = this.data.characterSkill === 'timeRewind' &&
+      this.data.skillState.timeRewind.count > 0 &&
+      this.data.skillState.timeRewind.history.length > 0;
+
     if (canRewind) {
       wx.showModal({
         title: '游戏结束',
@@ -904,7 +942,7 @@ Page({
         if (res.confirm) {
           this.restart();
         } else {
-          wx.switchTab({
+          wx.navigateTo({
             url: '/pages/index/index'
           });
         }

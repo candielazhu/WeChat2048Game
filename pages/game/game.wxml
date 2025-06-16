@@ -17,22 +17,36 @@
   <!-- 技能按钮区域 -->
   <view class="skill-section" wx:if="{{characterSkill}}">
     <view class="skill-controls">
-      <button 
-        class="skill-btn {{selectingBlock ? 'active' : ''}}" 
-        bindtap="useSkill"
-      >
+    <button class="skill-btn" bindtap="useSkill">
         <text class="skill-icon">{{skillIcon}}</text>
         <text class="skill-text">{{skillText}}</text>
-        <view class="skill-counts">
-          <text wx:if="{{characterSkill === 'blockDouble' && skillState.blockDouble.normalCount > 0}}">
-            {{skillState.blockDouble.normalCount}}次
-          </text>
-          <text wx:if="{{characterSkill === 'blockDouble' && skillState.blockDouble.globalCount > 0}}" class="global-count">
-            {{skillState.blockDouble.globalCount}}全
-          </text>
-        </view>
-      </button>
+    </button>
+    
+    <!-- 数值倍增师专属按钮 -->
+    <view wx:if="{{characterSkill === 'blockDouble'}}">
+      <view 
+        class="double-btn {{skillState.blockDouble.normalCount > 0 ? 'active' : ''}}" 
+        bindtap="activateBlockSelection"
+      >
+        {{skillState.blockDouble.normalCount}}
+      </view>
+      <view 
+        class="global-btn {{skillState.blockDouble.globalCount > 0 ? 'active' : ''}}" 
+        bindtap="useGlobalDouble"
+      >
+        全
+      </view>
+    </view>
       
+    <!-- 其他角色技能次数显示 -->
+    <view wx:if="{{characterSkill !== 'blockDouble'}}" class="skill-count {{characterSkill === 'timeRewind' ? 'time-rewind' : 'square-eliminate'}}">
+      <text wx:if="{{characterSkill === 'timeRewind'}}">
+        {{skillState.timeRewind.count}}
+      </text>
+      <text wx:if="{{characterSkill === 'squareEliminate'}}">
+        {{skillState.squareEliminate.count}}
+      </text>
+    </view>
       <!-- 确认翻倍按钮 -->
       <button 
         class="confirm-btn" 
