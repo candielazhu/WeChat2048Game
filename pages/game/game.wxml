@@ -14,19 +14,62 @@
     </view>
   </view>
 
+  <!-- 技能按钮区域 -->
+  <view class="skill-section" wx:if="{{characterSkill}}">
+    <view class="skill-controls">
+      <button 
+        class="skill-btn {{selectingBlock ? 'active' : ''}}" 
+        bindtap="useSkill"
+      >
+        <text class="skill-icon">{{skillIcon}}</text>
+        <text class="skill-text">{{skillText}}</text>
+        <view class="skill-counts">
+          <text wx:if="{{characterSkill === 'blockDouble' && skillState.blockDouble.normalCount > 0}}">
+            {{skillState.blockDouble.normalCount}}次
+          </text>
+          <text wx:if="{{characterSkill === 'blockDouble' && skillState.blockDouble.globalCount > 0}}" class="global-count">
+            {{skillState.blockDouble.globalCount}}全
+          </text>
+        </view>
+      </button>
+      
+      <!-- 确认翻倍按钮 -->
+      <button 
+        class="confirm-btn" 
+        wx:if="{{selectingBlock}}"
+        bindtap="doubleSelectedBlock"
+      >
+        确认翻倍
+      </button>
+    </view>
+  </view>
+  
   <!-- 游戏面板 -->
-  <view class="game-board {{isEmergency ? 'emergency' : ''}}" 
-        bindtouchstart="onTouchStart" 
-        bindtouchend="onTouchEnd">
+  <view 
+    class="game-board {{isEmergency ? 'emergency' : ''}} {{selectingBlock ? 'selecting' : ''}}" 
+    bindtouchstart="onTouchStart" 
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+  >
     <view class="grid-container">
       <view class="grid-row" wx:for="{{board}}" wx:key="index" wx:for-index="row">
-        <view class="grid-cell {{item > 0 ? 'tile-' + item : ''}} {{animationClasses[row][col] || ''}}" 
-              wx:for="{{item}}" 
-              wx:for-index="col"
-              wx:key="col">
+        <view 
+          class="grid-cell {{item > 0 ? 'tile-' + item : ''}} {{animationClasses[row][col] || ''}} {{selectedBlock.row == row && selectedBlock.col == col ? 'selected' : ''}}" 
+          wx:for="{{item}}" 
+          wx:for-index="col"
+          wx:key="col"
+          data-row="{{row}}"
+          data-col="{{col}}"
+          bindtap="onTapBlock"
+        >
           <text wx:if="{{item > 0}}">{{item}}</text>
         </view>
       </view>
+    </view>
+    
+    <!-- 选择模式提示 -->
+    <view class="selection-prompt" wx:if="{{selectingBlock}}">
+      请选择一个方块进行翻倍
     </view>
   </view>
 
