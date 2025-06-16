@@ -110,7 +110,7 @@
   text-align: center;
   width: 400rpx;
   height: 400rpx;
-  box-shadow: 0 40rpx 80rpx rgba(0, 0, 0, 0.1);
+  box-shadow: 0 40rpx 80rpx rgba(32, 23, 23, 0.1);
   backdrop-filter: blur(20rpx);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   animation: cardFloat 3s ease-in-out infinite;
