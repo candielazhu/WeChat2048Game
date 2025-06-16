@@ -1,4 +1,12 @@
+/* 防止整个页面滚动 */
+page {
+  height: 100%;
+  overflow: hidden;
+}
+
 .game-container {
+  height: 100vh;
+  overflow: hidden;
   background: #faf8ef;
   min-height: 100vh;
   display: flex;

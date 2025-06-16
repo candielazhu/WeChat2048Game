@@ -731,6 +731,10 @@ Page({
       const touch = e.touches[0];
       this.startX = touch.clientX;
       this.startY = touch.clientY;
+      // 获取棋盘位置
+      this.getBoardRect().then(rect => {
+        this.boardRect = rect;
+      });
       return;
     }
     
